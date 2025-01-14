@@ -9,4 +9,4 @@ if (PHP_MAJOR_VERSION < 8) {
 require_once __DIR__ . '/../config/init.php';
 require_once ROOT . '/vendor/autoload.php';
 
-print_r("Time: " . microtime(true) - $startAppTime);
+dump("Time: " . microtime(true) - $startAppTime);
