@@ -17,5 +17,5 @@ $app->router->post('/contact', function () {
 });
 
 $app->router->get('/post/(?P<id>[0-9]+)', function ($id) {
-    return 'post page - ' . $id;
+    return "post page - $id";
 });
