@@ -7,6 +7,7 @@ class Router
     public Request $request;
     public Response $response;
     protected array $routes = [];
+    protected array $routeParams = [];
 
     public function __construct(Request $request, Response $response)
     {
@@ -14,35 +15,79 @@ class Router
         $this->response = $response;
     }
 
+    public function add($path, $callback, $method): self
+    {
+        $path = trim($path, '/');
+
+        if (is_array($method)) {
+            $method = array_map('strtoupper', $method);
+        } else {
+            $method = [strtoupper($method)];
+        }
+
+        $this->routes[] = [
+            'path' => "/$path",
+            'callback' => $callback,
+            'middleware' => null,
+            'method' => $method,
+            'needToken' => true,
+        ];
+
+        return $this;
+    }
+
     public function getRoutes(): array
     {
         return $this->routes;
     }
 
-    public function get($path, $callback): void
+    public function get($path, $callback): self
     {
-        $path = trim($path, '/');
-        $this->routes['GET']["/$path"] = $callback;
+        return $this->add($path, $callback, 'GET');
     }
 
-    public function post($path, $callback): void
+    public function post($path, $callback): self
     {
-        $path = trim($path, '/');
-        $this->routes['POST']["/$path"] = $callback;
+        return $this->add($path, $callback, 'POST');
     }
 
     public function dispatch(): mixed
     {
         $path = $this->request->getPath();
-        $method = $this->request->getMethod();
-        $callback = $this->routes[$method]["/$path"] ?? false;
+        $route = $this->matchRoute($path);
 
-        if (false === $callback) {
+        if (false === $route) {
             $this->response->setResponseCode(404);
-            return 'page not found';
+            echo 'page not found';
+            die;
         }
 
-        return call_user_func($callback);
+        if (is_array($route['callback'])) {
+            $route['callback'][0] = new $route['callback'][0];
+        }
 
+        dump($this->routeParams);
+
+        return call_user_func_array($route['callback'], $this->routeParams);
+    }
+
+    protected function matchRoute($path): mixed
+    {
+        foreach ($this->routes as $route) {
+            if (
+                preg_match("#^{$route['path']}$#", "/$path", $matches) &&
+                in_array($this->request->getMethod(), $route['method'])
+            ) {
+                foreach ($matches as $k => $v) {
+                    if (is_string($k)) {
+                        $this->routeParams[$k] = $v;
+                    }
+                }
+
+                return $route;
+            }
+        }
+
+        return false;
     }
 }
