@@ -2,11 +2,10 @@
 
 namespace App\Controllers;
 
-class ContactController
+class ContactController extends \PHPFramework\Controller
 {
-
     public function index()
     {
-        return 'contact page';
+        return view('contact');
     }
 }
