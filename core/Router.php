@@ -66,8 +66,6 @@ class Router
             $route['callback'][0] = new $route['callback'][0];
         }
 
-        dump($this->routeParams);
-
         return call_user_func_array($route['callback'], $this->routeParams);
     }
 

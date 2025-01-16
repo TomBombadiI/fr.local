@@ -12,7 +12,7 @@ require_once __DIR__ . '/../config/init.php';
 require_once ROOT . '/vendor/autoload.php';
 require_once HELPERS . '/helpers.php';
 
-$request = new \PHPFramework\Request($_SERVER['QUERY_STRING']);
+$request = new \PHPFramework\Request($_SERVER['REQUEST_URI']);
 $response = new \PHPFramework\Response();
 $router = new \PHPFramework\Router($request, $response);
 
