@@ -6,6 +6,6 @@ class ContactController extends \PHPFramework\Controller
 {
     public function index()
     {
-        return view('contact');
+        return view('contact', ['title' => 'Страница контактов']);
     }
 }

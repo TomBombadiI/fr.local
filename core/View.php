@@ -12,17 +12,19 @@ class View
         $this->layout = $layout;
     }
 
-    public function render($view, $data = [], $layout = '')
+    public function render($view, $data = [], $layout = ''): string
     {
         $viewFile = VIEWS . "/{$view}.php";
 
-        if (is_file($viewFile)) {
+        if (file_exists($viewFile)) {
+            extract($data);
+
             ob_start();
             require $viewFile;
-            
+
             return ob_get_clean();
         } else {
-            return 'not found view ' . $viewFile;
+            abort('', 500);
         }
     }
 }

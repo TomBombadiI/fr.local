@@ -25,3 +25,10 @@ function view($view = '', $data = [], $layout = ''): View|string
 
     return app()->view;
 }
+
+function abort($error = '', $code = 404)
+{
+    response()->setResponseCode($code);
+    echo view("errors/{$code}", ['error' => $error], false);
+    die;
+}
