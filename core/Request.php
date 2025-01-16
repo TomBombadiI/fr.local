@@ -47,6 +47,16 @@ class Request
         return $_POST[$key] ?? $default;
     }
 
+    public function getAll(): array
+    {
+        return $_GET;
+    }
+
+    public function postAll(): array
+    {
+        return $_POST;
+    }
+
     protected function getUriWithoutQuery(): string
     {
         if ($this->uri) {
