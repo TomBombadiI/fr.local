@@ -13,4 +13,8 @@ require_once ROOT . '/vendor/autoload.php';
 
 $app = new Application();
 
+require_once CONFIG . '/routes.php';
+
+$app->run();
+
 dump("Time: " . microtime(true) - $startAppTime);
