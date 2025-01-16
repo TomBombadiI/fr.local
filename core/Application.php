@@ -30,8 +30,7 @@ class Application
         try {
             echo $this->router->dispatch();
         } catch (\Exception $exception) {
-            $this->response->setResponseCode(500);
-            echo '500 - error';
+            abort($exception->getMessage(), 500);
         }
     }
 }

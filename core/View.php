@@ -24,7 +24,7 @@ class View
 
             return ob_get_clean();
         } else {
-            abort('', 500);
+            abort("View file '{$view}.php' not found", 500);
         }
     }
 }
