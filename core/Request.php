@@ -12,11 +12,6 @@ class Request
         $this->uri = trim(urldecode($uri), '/');
     }
 
-    public function getPath(): string
-    {
-        return $this->getUriWithoutQuery();
-    }
-
     public function getMethod(): string
     {
         return strtoupper($_SERVER['REQUEST_METHOD']);
@@ -55,6 +50,11 @@ class Request
     public function postAll(): array
     {
         return $_POST;
+    }
+
+    public function getPath(): string
+    {
+        return $this->getUriWithoutQuery();
     }
 
     protected function getUriWithoutQuery(): string
