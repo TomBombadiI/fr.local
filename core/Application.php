@@ -5,23 +5,30 @@ namespace PHPFramework;
 class Application
 {
 
-    protected string $uri;
     public Request $request;
     public Response $response;
     public Router $router;
     public static Application $app;
 
-    public function __construct()
-    {
+    public function __construct(
+        Request $request,
+        Response $response,
+        Router $router,
+    ) {
         self::$app = $this;
-        $this->uri = $_SERVER['QUERY_STRING'];
-        $this->request = new Request($this->uri);
-        $this->response = new Response();
-        $this->router = new Router($this->request, $this->response);
+
+        $this->request = $request;
+        $this->response = $response;
+        $this->router = $router;
     }
 
     public function run(): void
     {
-        echo $this->router->dispatch();
+        try {
+            echo $this->router->dispatch();
+        } catch (\Exception $exception) {
+            $this->response->setResponseCode(500);
+            echo '500 - error';
+        }
     }
 }
