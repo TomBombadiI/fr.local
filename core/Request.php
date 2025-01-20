@@ -64,6 +64,11 @@ class Request
         return $data;
     }
 
+    public function getContentType(): string
+    {
+        return $_SERVER['CONTENT_TYPE'] ?? '';
+    }
+
     public function getPath(): string
     {
         return $this->getUriWithoutQuery();
