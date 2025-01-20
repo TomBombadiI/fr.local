@@ -58,7 +58,11 @@ class Request
 
         $requestData = $this->isGet() ? $_GET : $_POST;
         foreach ($requestData as $key => $value) {
-            $data[$key] = trim($value);
+            if (is_string($value)) {
+                $value = trim($value);
+            }
+
+            $data[$key] = $value;
         }
 
         return $data;

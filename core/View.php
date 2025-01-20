@@ -22,6 +22,7 @@ class View
         ]);
 
         $this->twig->addFunction(new TwigFunction('asset', 'asset'));
+        $this->twig->addFunction(new TwigFunction('getBaseUrl', 'getBaseUrl'));
     }
 
     public function render($view, $data = [], $layout = 'default'): string

@@ -2,18 +2,24 @@
 
 namespace PHPFramework;
 
+use Valitron\Validator;
+
 abstract class Model
 {
 
-    public array $fillable = [];
+    protected array $fillable = [];
     public array $attributes = [];
+    protected array $rules = [];
     protected array $errors = [];
-    protected array $ruleList = ['required', 'min', 'max'];
-    protected array $errorMessages = [
-        'required' => 'The :fieldname: field is required',
-        'max' => 'The :fieldname: field must be less than :rulevalue: characters',
-        'min' => 'The :fieldname: field must be more than :rulevalue: characters',
-    ];
+    protected array $labels = [];
+
+
+    public function __construct(bool $load = true)
+    {
+        if ($load) {
+            $this->loadData();
+        }
+    }
 
     public function loadData(): void
     {
@@ -28,6 +34,39 @@ abstract class Model
         }
     }
 
+    public function validate($data = [], $rules = [], $labels = []): bool
+    {
+        if (!$data) {
+            $data = $this->attributes;
+        }
 
+        if (!$rules) {
+            $rules = $this->rules;
+        }
+
+        if (!$labels) {
+            $labels = $this->labels;
+        }
+
+        Validator::langDir(CONFIG . '/lang');
+        Validator::lang('ru');
+
+        $validator = new Validator($data);
+
+        $validator->rules($rules);
+        $validator->labels($labels);
+
+        if (!$validator->validate()) {
+            $this->errors = $validator->errors();
+            return false;
+        }
+
+        return true;
+    }
+
+    public function getErrors(): array
+    {
+        return $this->errors;
+    }
 
 }

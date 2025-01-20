@@ -1,0 +1,27 @@
+{% extends "layouts/default.twig" %}
+
+{% block content %}
+
+	<form action="{{ getBaseUrl('/register') }}" method="post">
+
+		<div class="input">
+			<input type="text" name="name">
+		</div>
+
+		<div class="input">
+			<input type="email" name="email">
+		</div>
+
+		<div class="input">
+			<input type="password" name="password">
+		</div>
+
+		<div class="input">
+			<input type="password" name="confirm_password">
+		</div>
+
+		<button type="submit">Register</button>
+
+	</form>
+
+{% endblock %}
