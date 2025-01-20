@@ -33,6 +33,12 @@ function abort($error = '', $code = 404)
     die;
 }
 
-function getBaseUrl($path): string {
+function getBaseUrl($path): string
+{
     return PATH . $path;
+}
+
+function asset($path)
+{
+    return PATH . '/assets/' . ltrim($path, '/');
 }

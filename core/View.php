@@ -4,6 +4,7 @@ namespace PHPFramework;
 
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+use Twig\TwigFunction;
 
 class View
 {
@@ -19,6 +20,8 @@ class View
             'cache' => VIEWS . '/cache',
             'debug' => DEBUG,
         ]);
+
+        $this->twig->addFunction(new TwigFunction('asset', 'asset'));
     }
 
     public function render($view, $data = [], $layout = 'default'): string

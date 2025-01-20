@@ -43,26 +43,30 @@ class __TwigTemplate_e145487aba5900db7f5fcdca5550e7d1 extends Template
         yield "<!DOCTYPE html>
 <html lang=\"en\">
 
-<head>
-    <meta charset=\"UTF-8\">
-    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
-    <title>";
+\t<head>
+\t\t<meta charset=\"UTF-8\">
+\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+\t\t<title>";
         // line 7
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((array_key_exists("title", $context)) ? (Twig\Extension\CoreExtension::default(($context["title"] ?? null), ($context["PROJECT_NAME"] ?? null))) : (($context["PROJECT_NAME"] ?? null))), "html", null, true);
         yield "</title>
-    <link rel=\"shortcut icon\" href=\"<?= getBaseUrl('/assets/img/favicon.png') ?>\" type=\"image/x-icon\">
-</head>
+\t\t<link rel=\"shortcut icon\" href=\"";
+        // line 8
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(asset("img/favicon.png"), "html", null, true);
+        yield "\" type=\"image/x-icon\">
+\t</head>
 
-<body>
+\t<body>
 
-";
+\t\t";
         // line 13
         yield from $this->unwrap()->yieldBlock('content', $context, $blocks);
         // line 14
         yield "
-</body>
+\t</body>
 
-</html>";
+</html>
+";
         yield from [];
     }
 
@@ -97,7 +101,7 @@ class __TwigTemplate_e145487aba5900db7f5fcdca5550e7d1 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  70 => 13,  62 => 14,  60 => 13,  51 => 7,  43 => 1,);
+        return array (  74 => 13,  65 => 14,  63 => 13,  55 => 8,  51 => 7,  43 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -105,19 +109,20 @@ class __TwigTemplate_e145487aba5900db7f5fcdca5550e7d1 extends Template
         return new Source("<!DOCTYPE html>
 <html lang=\"en\">
 
-<head>
-    <meta charset=\"UTF-8\">
-    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
-    <title>{{ title | default(PROJECT_NAME) }}</title>
-    <link rel=\"shortcut icon\" href=\"<?= getBaseUrl('/assets/img/favicon.png') ?>\" type=\"image/x-icon\">
-</head>
+\t<head>
+\t\t<meta charset=\"UTF-8\">
+\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+\t\t<title>{{ title | default(PROJECT_NAME) }}</title>
+\t\t<link rel=\"shortcut icon\" href=\"{{ asset('img/favicon.png') }}\" type=\"image/x-icon\">
+\t</head>
 
-<body>
+\t<body>
 
-{% block content %}{% endblock %}
+\t\t{% block content %}{% endblock %}
 
-</body>
+\t</body>
 
-</html>", "layouts/default.twig", "C:\\xampp\\htdocs\\fr.local\\app\\Views\\layouts\\default.twig");
+</html>
+", "layouts/default.twig", "C:\\xampp\\htdocs\\fr.local\\app\\Views\\layouts\\default.twig");
     }
 }
