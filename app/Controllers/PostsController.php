@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class PostsController extends \PHPFramework\Controller
+class PostsController extends BaseController
 {
     public function index()
     {
