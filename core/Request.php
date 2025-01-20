@@ -52,6 +52,18 @@ class Request
         return $_POST;
     }
 
+    public function getData(): array
+    {
+        $data = [];
+
+        $requestData = $this->isGet() ? $_GET : $_POST;
+        foreach ($requestData as $key => $value) {
+            $data[$key] = trim($value);
+        }
+
+        return $data;
+    }
+
     public function getPath(): string
     {
         return $this->getUriWithoutQuery();

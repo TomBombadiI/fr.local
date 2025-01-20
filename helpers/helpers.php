@@ -1,18 +1,21 @@
 <?php
 
+use PHPFramework\Application;
 use PHPFramework\View;
+use PHPFramework\Request;
+use PHPFramework\Response;
 
-function app()
+function app(): Application
 {
-    return \PHPFramework\Application::$app;
+    return Application::$app;
 }
 
-function request()
+function request(): Request
 {
     return app()->request;
 }
 
-function response()
+function response(): Response
 {
     return app()->response;
 }
@@ -26,7 +29,7 @@ function view($view = '', $data = [], $layout = ''): View|string
     return app()->view;
 }
 
-function abort($error = '', $code = 404)
+function abort($error = '', $code = 404): void
 {
     response()->setResponseCode($code);
     echo view("errors/{$code}", ['error' => $error], false);
@@ -38,7 +41,7 @@ function getBaseUrl($path): string
     return PATH . $path;
 }
 
-function asset($path)
+function asset($path): string
 {
     return PATH . '/assets/' . ltrim($path, '/');
 }
