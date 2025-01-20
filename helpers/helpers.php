@@ -32,3 +32,7 @@ function abort($error = '', $code = 404)
     echo view("errors/{$code}", ['error' => $error], false);
     die;
 }
+
+function getBaseUrl($path): string {
+    return PATH . $path;
+}
