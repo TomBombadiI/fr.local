@@ -2,43 +2,31 @@
 
 namespace PHPFramework;
 
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
+
 class View
 {
-    public string $layout;
-    public string $content = '';
+    protected Environment $twig;
+    protected string $layout;
 
     public function __construct(string $layout)
     {
         $this->layout = $layout;
+
+        $loader = new FilesystemLoader(VIEWS);
+        $this->twig = new Environment($loader, [
+            'cache' => VIEWS . '/cache',
+            'debug' => DEBUG,
+        ]);
     }
 
-    public function render($view, $data = [], $layout = ''): string
+    public function render($view, $data = [], $layout = 'default'): string
     {
-        $viewFile = VIEWS . "/{$view}.php";
-
-        if (file_exists($viewFile)) {
-            extract($data);
-
-            ob_start();
-            require $viewFile;
-            $this->content = ob_get_clean();
-        } else {
-            abort("View file '{$view}.php' not found", 500);
+        if ($layout) {
+            $data['layout'] = $layout;
         }
 
-        if (false === $layout) {
-            return $this->content;
-        }
-
-        $layoutFilename = $layout ?: $this->layout;
-        $layoutFilePath = VIEWS . "/layouts/{$layoutFilename}.php";
-
-        if (file_exists($layoutFilePath)) {
-            ob_start();
-            require_once $layoutFilePath;
-            return ob_get_clean();
-        } else {
-            abort("Layout file '{$layoutFilename}.php' not found", 500);
-        }
+        return $this->twig->render("{$view}.twig", $data);
     }
 }

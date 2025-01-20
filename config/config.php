@@ -10,3 +10,6 @@ const CONFIG = ROOT . '/config';
 const VIEWS = APP . '/Views';
 const LAYOUT = 'default';
 const PATH = 'http://fr.local';
+const PROJECT_NAME = 'PHPFramework';
+
+const DEBUG = true;

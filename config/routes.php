@@ -9,6 +9,7 @@ $app->router->get('/about', function () {
 });
 
 $app->router->get('/contact', [\App\Controllers\ContactController::class, 'index']);
+$app->router->get('/posts', [\App\Controllers\PostsController::class, 'index']);
 
 $app->router->get('/post/(?P<id>[0-9]+)', function ($id) {
     return "post page - $id";
