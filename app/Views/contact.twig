@@ -2,7 +2,16 @@
 
 {% block content %}
 
-<h1>{{ title }}</h1>
-<p>This is Contact page</p>
+	<h1>{{ title }}</h1>
+	<p>This is Contact page</p>
+
+	<form action="/contact" method="post">
+    
+        <input type="email" name="email" id="email">
+        <input type="text" name="name" id="name">
+        <textarea type="text" name="message" id="message"></textarea>
+        <button type="submit">Send</button>
+
+    </form>
 
 {% endblock %}

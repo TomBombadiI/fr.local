@@ -8,4 +8,12 @@ class ContactController extends \PHPFramework\Controller
     {
         return view('contact', ['title' => 'Страница контактов']);
     }
+
+    public function send()
+    {
+        $model = new \App\Models\Contact();
+        $model->loadData();
+
+        dump($model);
+    }
 }
