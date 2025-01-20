@@ -24,10 +24,6 @@ class UserController extends BaseController
     public function store()
     {
         $model = new User();
-        dump($model->attributes);
-        dump($model->validate());
-        dump($model->getErrors());
-        dd(request()->getData());
     }
 
 }
